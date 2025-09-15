@@ -1,0 +1,72 @@
+@inherits LayoutComponentBase
+
+<div class="app-container">
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="img/logo.svg" alt="Blazing Pizza Logo" class="logo" />
+                <h1 class="brand-title">🍕 Blazing Pizza</h1>
+            </div>
+            <div class="header-info">
+                <p class="tagline">Delicious pizzas delivered fast!</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <NavLink href="/" class="nav-item" Match="NavLinkMatch.All">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-text">Home</span>
+            </NavLink>
+
+            <NavLink href="/pizzas" class="nav-item" Match="NavLinkMatch.Prefix">
+                <span class="nav-icon">🍕</span>
+                <span class="nav-text">Browse Pizzas</span>
+            </NavLink>
+
+            <NavLink href="/favorite-pizza" class="nav-item" Match="NavLinkMatch.Prefix">
+                <span class="nav-icon">❤️</span>
+                <span class="nav-text">Tell us your favorite</span>
+            </NavLink>
+
+            <NavLink href="/myorders" class="nav-item" Match="NavLinkMatch.Prefix">
+                <span class="nav-icon">📋</span>
+                <span class="nav-text">Track Your Order</span>
+            </NavLink>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        @Body
+    </main>
+
+    <footer class="app-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>📞 (555) 123-PIZZA</p>
+                <p>📧 orders@blazingpizza.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Hours</h3>
+                <p>Mon-Thu: 11am-10pm</p>
+                <p>Fri-Sat: 11am-11pm</p>
+                <p>Sun: 12pm-9pm</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <NavLink href="/pizzas">Menu</NavLink>
+                <NavLink href="/myorders">Orders</NavLink>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>@TrademarkMessage</p>
+            <p>Developed by Jaydan Valencia - United States</p>
+        </div>
+    </footer>
+</div>
+
+@code {
+    public string TrademarkMessage { get; set; } = "All content is &copy; Blazing Pizzas 2024";
+}

@@ -1,0 +1,167 @@
+@page "/admin"
+@layout AdminLayout
+
+<h1>Admin Dashboard</h1>
+
+<div class="dashboard-grid">
+    <div class="dashboard-card">
+        <h3>📊 Today's Orders</h3>
+        <div class="metric">
+            <span class="metric-value">47</span>
+            <span class="metric-label">Orders</span>
+        </div>
+        <p class="metric-change positive">+12% from yesterday</p>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>💰 Revenue</h3>
+        <div class="metric">
+            <span class="metric-value">$1,250</span>
+            <span class="metric-label">Today</span>
+        </div>
+        <p class="metric-change positive">+8% from yesterday</p>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>🍕 Popular Pizza</h3>
+        <div class="metric">
+            <span class="metric-value">Margherita</span>
+            <span class="metric-label">Most Ordered</span>
+        </div>
+        <p class="metric-change">23 orders today</p>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>⏱️ Avg. Prep Time</h3>
+        <div class="metric">
+            <span class="metric-value">12</span>
+            <span class="metric-label">Minutes</span>
+        </div>
+        <p class="metric-change negative">+2 min from target</p>
+    </div>
+</div>
+
+<div class="admin-section">
+    <h2>Recent Orders</h2>
+    <div class="orders-table">
+        <div class="table-header">
+            <span>Order ID</span>
+            <span>Customer</span>
+            <span>Items</span>
+            <span>Status</span>
+            <span>Total</span>
+        </div>
+        <div class="table-row">
+            <span>#123</span>
+            <span>John Doe</span>
+            <span>2x Margherita</span>
+            <span class="status preparing">Preparing</span>
+            <span>$17.98</span>
+        </div>
+        <div class="table-row">
+            <span>#124</span>
+            <span>Jane Smith</span>
+            <span>1x Pepperoni</span>
+            <span class="status delivered">Delivered</span>
+            <span>$9.99</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .dashboard-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid #d32f2f;
+    }
+
+    .dashboard-card h3 {
+        margin: 0 0 1rem 0;
+        color: #495057;
+    }
+
+    .metric {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.5rem;
+    }
+
+    .metric-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #d32f2f;
+    }
+
+    .metric-label {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .metric-change {
+        font-size: 0.8rem;
+        margin: 0;
+    }
+
+    .metric-change.positive {
+        color: #28a745;
+    }
+
+    .metric-change.negative {
+        color: #dc3545;
+    }
+
+    .admin-section {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .orders-table {
+        margin-top: 1rem;
+    }
+
+    .table-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        gap: 1rem;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .table-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        gap: 1rem;
+        padding: 1rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .status {
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    .status.preparing {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    .status.delivered {
+        background-color: #d4edda;
+        color: #155724;
+    }
+</style>

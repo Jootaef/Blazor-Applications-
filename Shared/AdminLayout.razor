@@ -1,0 +1,61 @@
+@inherits LayoutComponentBase
+
+<div class="admin-container">
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <h1 class="admin-title">🔧 Admin Panel</h1>
+            <div class="admin-nav">
+                <NavLink href="/admin" class="admin-nav-item" Match="NavLinkMatch.All">
+                    Dashboard
+                </NavLink>
+                <NavLink href="/admin/orders" class="admin-nav-item" Match="NavLinkMatch.Prefix">
+                    Orders
+                </NavLink>
+                <NavLink href="/admin/menu" class="admin-nav-item" Match="NavLinkMatch.Prefix">
+                    Menu Management
+                </NavLink>
+                <NavLink href="/" class="admin-nav-item">
+                    Back to Site
+                </NavLink>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-body">
+        <aside class="admin-sidebar">
+            <div class="sidebar-section">
+                <h3>Quick Stats</h3>
+                <div class="stat-item">
+                    <span class="stat-label">Orders Today:</span>
+                    <span class="stat-value">@OrdersToday</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Revenue:</span>
+                    <span class="stat-value">$@Revenue</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>System Status</h3>
+                <div class="status-indicator @(SystemOnline ? "online" : "offline")">
+                    @(SystemOnline ? "🟢 Online" : "🔴 Offline")
+                </div>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            @Body
+        </main>
+    </div>
+
+    <footer class="admin-footer">
+        <p>Admin Panel - @DateTime.Now.ToString("yyyy-MM-dd HH:mm")</p>
+        <p>Developed by Jaydan Valencia - United States</p>
+    </footer>
+</div>
+
+@code {
+    private int OrdersToday = 47;
+    private decimal Revenue = 1250.75m;
+    private bool SystemOnline = true;
+}

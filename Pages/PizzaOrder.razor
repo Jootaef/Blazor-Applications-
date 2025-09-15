@@ -1,0 +1,55 @@
+@page "/pizza-order/{orderid:int}"
+
+<h1>📋 Pizza Order Details</h1>
+
+<div class="pizza-card">
+    <h2>Order #@OrderId</h2>
+    <p>Order ID: <strong>@OrderId</strong></p>
+    
+    <div class="topping-info">
+        <h3>Order Status:</h3>
+        <p>@GetOrderStatus()</p>
+        
+        <h3>Estimated Delivery:</h3>
+        <p>@GetDeliveryTime()</p>
+        
+        <h3>Order Details:</h3>
+        <ul>
+            <li>Order placed: @DateTime.Now.AddMinutes(-@OrderId).ToString("HH:mm")</li>
+            <li>Pizza: Margherita</li>
+            <li>Size: 12 inches</li>
+            <li>Total: $@(OrderId * 2.50)</li>
+        </ul>
+    </div>
+    
+    <NavLink href="/" class="btn">Back to Home</NavLink>
+</div>
+
+@code {
+    [Parameter]
+    public int OrderId { get; set; }
+    
+    private string GetOrderStatus()
+    {
+        return OrderId switch
+        {
+                    < 100 => "Preparing",
+                    < 200 => "In the oven",
+                    < 300 => "Out for delivery",
+                    _ => "Delivered"
+                };
+            }
+    
+            private string GetDeliveryTime()
+            {
+                var minutes = OrderId switch
+                {
+                    < 100 => 25,
+                    < 200 => 15,
+                    < 300 => 5,
+                    _ => 0
+                };
+        
+                return minutes > 0 ? $"Approximately {minutes} minutes" : "Already delivered!";
+            }
+        }

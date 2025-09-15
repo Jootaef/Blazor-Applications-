@@ -1,0 +1,60 @@
+@page "/payment"
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager NavManager
+
+<h1>💳 Payment Page</h1>
+
+<div class="pizza-card">
+    <h2>Order Summary</h2>
+
+    @if (!string.IsNullOrEmpty(PizzaName))
+    {
+        <p><strong>Pizza:</strong> @PizzaName</p>
+    }
+
+    @if (!string.IsNullOrEmpty(ToppingName))
+    {
+        <p><strong>Extra Topping:</strong> @ToppingName</p>
+    }
+
+    <div style="margin-top: 2rem;">
+        <h3>Payment Information</h3>
+        <p>This is a demo payment page. In a real application, you would integrate with a payment processor here.</p>
+
+        <button class="btn" @onclick="CompleteOrder">
+            Complete Order
+        </button>
+
+        <NavLink href="/" class="btn" style="margin-left: 1rem;">
+            Cancel Order
+        </NavLink>
+    </div>
+</div>
+
+@code {
+    private string PizzaName { get; set; } = string.Empty;
+    private string ToppingName { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        // Parse query string to get pizza and topping information
+        var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+        var query = QueryHelpers.ParseQuery(uri.Query);
+
+        if (query.TryGetValue("pizza", out var pizza))
+        {
+            PizzaName = Uri.UnescapeDataString(pizza.ToString());
+        }
+
+        if (query.TryGetValue("topping", out var topping))
+        {
+            ToppingName = Uri.UnescapeDataString(topping.ToString());
+        }
+    }
+
+    private void CompleteOrder()
+    {
+        // In a real application, this would process the payment
+        NavManager.NavigateTo("/order-complete");
+    }
+}

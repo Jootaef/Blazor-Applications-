@@ -1,0 +1,67 @@
+@page "/pizzas/{pizzaname}"
+@page "/custom-pizzas/{pizzaname}"
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager NavManager
+
+<h1>🍕 Pizza Details</h1>
+
+<div class="pizza-card">
+    <h2>@PizzaName</h2>
+
+    @if (!string.IsNullOrEmpty(ToppingName))
+    {
+        <div class="topping-info">
+            <h3>Extra Topping Requested:</h3>
+            <p><strong>@ToppingName</strong></p>
+            <p>Great choice! This topping pairs perfectly with @PizzaName pizza.</p>
+        </div>
+    }
+
+    <p>You want to order a: <strong>@PizzaName</strong></p>
+
+    @if (!string.IsNullOrEmpty(ToppingName))
+    {
+        <p>With extra topping: <strong>@ToppingName</strong></p>
+    }
+
+    <div style="margin-top: 1rem;">
+        <button class="btn" @onclick="NavigateToPaymentPage">
+            Buy this pizza!
+        </button>
+
+        <NavLink href="@HomePageURI" class="btn" style="margin-left: 1rem;">
+            Back to Home
+        </NavLink>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string PizzaName { get; set; } = string.Empty;
+
+    private string ToppingName { get; set; } = string.Empty;
+    private string HomePageURI { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        // Get the base URI for navigation
+        HomePageURI = NavManager.BaseUri;
+
+        // Parse query string to get extra topping
+        var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("extratopping", out var extraTopping))
+        {
+            ToppingName = System.Convert.ToString(extraTopping) ?? string.Empty;
+        }
+    }
+
+    private void NavigateToPaymentPage()
+    {
+        var paymentUrl = $"/payment?pizza={Uri.EscapeDataString(PizzaName)}";
+        if (!string.IsNullOrEmpty(ToppingName))
+        {
+            paymentUrl += $"&topping={Uri.EscapeDataString(ToppingName)}";
+        }
+        NavManager.NavigateTo(paymentUrl);
+    }
+}

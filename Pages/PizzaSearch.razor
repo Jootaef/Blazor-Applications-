@@ -1,0 +1,77 @@
+@page "/pizza-search/{maxprice:decimal}"
+@page "/pizza-search/{vegan:bool}"
+@page "/pizza-search/{weight:double}"
+
+<h1>🔍 Pizza Search</h1>
+
+<div class="pizza-card">
+    <h2>Search Results</h2>
+
+    @if (MaxPrice > 0)
+    {
+        <p>Pizzas under <strong>$@MaxPrice</strong>:</p>
+        <ul>
+            <li>Margherita - $8.99</li>
+            <li>Pepperoni - $9.99</li>
+            <li>Cheese - $7.99</li>
+        </ul>
+    }
+
+    @if (IsVegan.HasValue)
+    {
+        <p>@(IsVegan.Value ? "Vegan" : "Non-vegan") pizzas:</p>
+        <ul>
+            @if (IsVegan.Value)
+            {
+                <li>Margherita (no cheese)</li>
+                <li>Vegetarian Deluxe</li>
+                <li>Garden Fresh</li>
+            }
+            else
+            {
+                <li>Pepperoni</li>
+                <li>Supreme</li>
+                <li>Meat Lovers</li>
+            }
+        </ul>
+    }
+
+    @if (Weight > 0)
+    {
+        <p>Pizzas weighing approximately <strong>@Weight lbs</strong>:</p>
+        <ul>
+            <li>Personal Pizza (0.5 lbs)</li>
+            <li>Small Pizza (1.0 lbs)</li>
+            <li>Medium Pizza (1.5 lbs)</li>
+            <li>Large Pizza (2.0 lbs)</li>
+        </ul>
+    }
+
+    <div class="topping-info">
+        <h3>Try these search URLs:</h3>
+        <ul>
+            <li>
+                <NavLink href="/pizza-search/10.00">Under $10.00</NavLink>
+            </li>
+            <li>
+                <NavLink href="/pizza-search/true">Vegan pizzas</NavLink>
+            </li>
+            <li>
+                <NavLink href="/pizza-search/1.5">1.5 lb pizzas</NavLink>
+            </li>
+        </ul>
+    </div>
+
+    <NavLink href="/" class="btn">Back to Home</NavLink>
+</div>
+
+@code {
+    [Parameter]
+    public decimal MaxPrice { get; set; }
+
+    [Parameter]
+    public bool? IsVegan { get; set; }
+
+    [Parameter]
+    public double Weight { get; set; }
+}

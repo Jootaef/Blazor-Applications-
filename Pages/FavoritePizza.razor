@@ -1,0 +1,38 @@
+@page "/favorite-pizza/{favorite}"
+
+<h1>🍕 Your Favorite Pizza</h1>
+
+<div class="pizza-card">
+    <h2>@Favorite</h2>
+    <p>Your favorite pizza is: <strong>@Favorite</strong></p>
+
+    <div class="topping-info">
+        <h3>Recommended for you:</h3>
+        <p>Since you like @Favorite, you might also enjoy:</p>
+        <ul>
+            @if (Favorite.ToLower().Contains("margherita"))
+            {
+                <li>Pepperoni Pizza</li>
+                <li>Supreme Pizza</li>
+            }
+            else if (Favorite.ToLower().Contains("pepperoni"))
+            {
+                <li>Margherita Pizza</li>
+                <li>Meat Lovers Pizza</li>
+            }
+            else
+            {
+                <li>Margherita Pizza</li>
+                <li>Pepperoni Pizza</li>
+                <li>Supreme Pizza</li>
+            }
+        </ul>
+    </div>
+
+    <NavLink href="/" class="btn">Back to Home</NavLink>
+</div>
+
+@code {
+    [Parameter]
+    public string Favorite { get; set; } = string.Empty;
+}

@@ -1,0 +1,12 @@
+<Router AppAssembly="@typeof(Program).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+    </Found>
+    <NotFound>
+        <div class="error-message">
+            <h2>Sorry, we haven't found any pizzas here.</h2>
+            <p>The page you're looking for doesn't exist.</p>
+            <NavLink href="/" class="btn">Go to Home Page</NavLink>
+        </div>
+    </NotFound>
+</Router>

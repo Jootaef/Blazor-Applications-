@@ -1,0 +1,125 @@
+@page "/"
+
+<h1>Welcome to Pizza Delivery Company! 🍕</h1>
+
+<div class="pizza-card">
+    <h2>Our Popular Pizzas</h2>
+    <p>Click on any pizza to see details and add custom toppings!</p>
+
+    <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <div class="pizza-card">
+            <h3>Margherita</h3>
+            <p>Classic tomato sauce, mozzarella, and fresh basil</p>
+            <NavLink href="/pizzas/margherita" class="btn">View Details</NavLink>
+        </div>
+
+        <div class="pizza-card">
+            <h3>Pepperoni</h3>
+            <p>Spicy pepperoni with mozzarella and tomato sauce</p>
+            <NavLink href="/pizzas/pepperoni" class="btn">View Details</NavLink>
+        </div>
+
+        <div class="pizza-card">
+            <h3>Supreme</h3>
+            <p>Pepperoni, sausage, peppers, onions, and mushrooms</p>
+            <NavLink href="/pizzas/supreme" class="btn">View Details</NavLink>
+        </div>
+    </div>
+</div>
+
+<div class="pizza-card">
+    <h2>Try Custom Toppings!</h2>
+    <p>Add extra toppings to any pizza by using query parameters:</p>
+    <ul>
+        <li>
+            <NavLink href="/pizzas/margherita?extratopping=pineapple">Margherita with Pineapple</NavLink>
+        </li>
+        <li>
+            <NavLink href="/custom-pizzas/pepperoni?extratopping=extra%20cheese">Pepperoni with Extra Cheese</NavLink>
+        </li>
+        <li>
+            <NavLink href="/pizzas/supreme?extratopping=jalapenos">Supreme with Jalapeños</NavLink>
+        </li>
+    </ul>
+</div>
+
+<div class="pizza-card">
+    <h2>Route Parameter Examples</h2>
+    <p>Explore different types of route parameters:</p>
+
+    <h3>Basic Route Parameters:</h3>
+    <ul>
+        <li>
+            <NavLink href="/favorite-pizza/margherita">Favorite Pizza: Margherita</NavLink>
+        </li>
+        <li>
+            <NavLink href="/favorite-pizza/pepperoni">Favorite Pizza: Pepperoni</NavLink>
+        </li>
+    </ul>
+
+    <h3>Optional Route Parameters:</h3>
+    <ul>
+        <li>
+            <NavLink href="/pizza-size">Default Size (12 inches)</NavLink>
+        </li>
+        <li>
+            <NavLink href="/pizza-size/14">14 inch pizza</NavLink>
+        </li>
+        <li>
+            <NavLink href="/pizza-size/16">16 inch pizza</NavLink>
+        </li>
+    </ul>
+
+    <h3>Route Constraints:</h3>
+    <ul>
+        <li>
+            <NavLink href="/pizza-order/123">Order #123 (integer)</NavLink>
+        </li>
+        <li>
+            <NavLink href="/pizza-order/456">Order #456 (integer)</NavLink>
+        </li>
+    </ul>
+
+    <h3>Catch-All Route Parameters:</h3>
+    <ul>
+        <li>
+            <NavLink href="/multiple-favorites/margherita">Single favorite</NavLink>
+        </li>
+        <li>
+            <NavLink href="/multiple-favorites/margherita/pepperoni">Two favorites</NavLink>
+        </li>
+        <li>
+            <NavLink href="/multiple-favorites/margherita/pepperoni/supreme">Three favorites</NavLink>
+        </li>
+    </ul>
+
+    <h3>Type-Specific Route Constraints:</h3>
+    <ul>
+        <li>
+            <NavLink href="/pizza-search/10.00">Under $10.00 (decimal)</NavLink>
+        </li>
+        <li>
+            <NavLink href="/pizza-search/true">Vegan pizzas (boolean)</NavLink>
+        </li>
+        <li>
+            <NavLink href="/pizza-search/1.5">1.5 lb pizzas (double)</NavLink>
+        </li>
+    </ul>
+</div>
+
+<div class="pizza-card">
+    <h2>🎨 Layout System</h2>
+    <p>Explore our Blazor layout system:</p>
+    <ul>
+        <li>
+            <NavLink href="/layout-demo">Layout System Demo</NavLink>
+        </li>
+        <li>
+            <NavLink href="/admin">Admin Layout Example</NavLink>
+        </li>
+        <li>
+            <NavLink href="/receipt/123">Print Layout Example</NavLink>
+        </li>
+    </ul>
+</div>

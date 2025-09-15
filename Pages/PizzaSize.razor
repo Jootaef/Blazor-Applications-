@@ -1,0 +1,58 @@
+@page "/pizza-size/{size?}"
+
+<h1>🍕 Pizza Size Selection</h1>
+
+<div class="pizza-card">
+    <h2>Size: @Size inches</h2>
+    <p>Your preferred pizza size is: <strong>@Size inches</strong></p>
+
+    <div class="topping-info">
+        <h3>Size Information:</h3>
+        <p>@GetSizeDescription()</p>
+
+        <h3>Available Sizes:</h3>
+        <ul>
+            <li>
+                <NavLink href="/pizza-size/8">8 inches - Personal</NavLink>
+            </li>
+            <li>
+                <NavLink href="/pizza-size/10">10 inches - Small</NavLink>
+            </li>
+            <li>
+                <NavLink href="/pizza-size/12">12 inches - Medium</NavLink>
+            </li>
+            <li>
+                <NavLink href="/pizza-size/14">14 inches - Large</NavLink>
+            </li>
+            <li>
+                <NavLink href="/pizza-size/16">16 inches - Extra Large</NavLink>
+            </li>
+        </ul>
+    </div>
+
+    <NavLink href="/" class="btn">Back to Home</NavLink>
+</div>
+
+@code {
+    [Parameter]
+    public string Size { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        // Set default value for optional parameter
+        Size ??= "12";
+    }
+
+    private string GetSizeDescription()
+    {
+        return Size switch
+        {
+            "8" => "Perfect for one person",
+            "10" => "Great for sharing between two people",
+            "12" => "Our most popular size - feeds 2-3 people",
+            "14" => "Large enough for a family",
+            "16" => "Party size - feeds 4-6 people",
+            _ => "Custom size - contact us for pricing"
+        };
+    }
+}

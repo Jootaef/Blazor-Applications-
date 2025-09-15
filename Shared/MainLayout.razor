@@ -1,0 +1,21 @@
+@inherits LayoutComponentBase
+
+<div class="navbar">
+    <NavLink href="/" class="navbar-brand" Match="NavLinkMatch.All">🍕 Pizza Delivery Company</NavLink>
+    <div class="navbar-nav">
+        <NavLink href="/" Match="NavLinkMatch.All">Home</NavLink>
+        <NavLink href="/pizzas" Match="NavLinkMatch.Prefix">Pizzas</NavLink>
+        <NavLink href="/custom-pizzas" Match="NavLinkMatch.Prefix">Custom Pizzas</NavLink>
+    </div>
+</div>
+
+<div class="container">
+    @Body
+</div>
+
+<footer class="app-footer">
+    <div class="footer-content">
+        <p>&copy; Pizza Delivery Company @DateTime.Now.Year</p>
+        <p>Developed by Jaydan Valencia - United States</p>
+    </div>
+</footer>

@@ -1,0 +1,136 @@
+@page "/layout-demo"
+
+<h1>🎨 Layout System Demo</h1>
+
+<div class="pizza-card">
+    <h2>Available Layouts</h2>
+    <p>This page demonstrates different layout options available in our Blazor app:</p>
+
+    <div class="layout-options">
+        <div class="layout-option">
+            <h3>🏠 Main Layout (Default)</h3>
+            <p>Standard layout with header, navigation, and footer</p>
+            <ul>
+                <li>Branded header with logo</li>
+                <li>Main navigation menu</li>
+                <li>Responsive footer</li>
+                <li>Used by most pages</li>
+            </ul>
+            <NavLink href="/" class="btn">View Main Layout</NavLink>
+        </div>
+
+        <div class="layout-option">
+            <h3>🔧 Admin Layout</h3>
+            <p>Specialized layout for administrative functions</p>
+            <ul>
+                <li>Admin-specific navigation</li>
+                <li>Sidebar with quick stats</li>
+                <li>System status indicators</li>
+                <li>Dark theme styling</li>
+            </ul>
+            <NavLink href="/admin" class="btn">View Admin Layout</NavLink>
+        </div>
+
+        <div class="layout-option">
+            <h3>🖨️ Print Layout</h3>
+            <p>Optimized layout for printing and PDF generation</p>
+            <ul>
+                <li>Clean, minimal design</li>
+                <li>Print-friendly styling</li>
+                <li>No navigation elements</li>
+                <li>Optimized for paper</li>
+            </ul>
+            <NavLink href="/receipt/123" class="btn">View Print Layout</NavLink>
+        </div>
+    </div>
+</div>
+
+<div class="pizza-card">
+    <h2>Layout Implementation</h2>
+    <p>Here's how layouts are implemented in Blazor:</p>
+
+    <h3>1. Layout Component Structure</h3>
+    <pre><code>@@inherits LayoutComponentBase
+
+&lt;header&gt;
+    &lt;h1&gt;Blazing Pizza&lt;/h1&gt;
+&lt;/header&gt;
+
+&lt;nav&gt;
+    &lt;a href="Pizzas"&gt;Browse Pizzas&lt;/a&gt;
+&lt;/nav&gt;
+
+@@Body
+
+&lt;footer&gt;
+    &lt;p&gt;© Blazing Pizzas 2024&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+
+    <h3>2. Using Layouts in Components</h3>
+    <pre><code>@@page "/admin"
+@@layout AdminLayout
+
+&lt;h1&gt;Admin Dashboard&lt;/h1&gt;
+&lt;p&gt;This content appears in the @@Body section&lt;/p&gt;</code></pre>
+
+    <h3>3. Default Layout Configuration</h3>
+    <pre><code>&lt;Router AppAssembly="@@typeof(Program).Assembly"&gt;
+    &lt;Found Context="routeData"&gt;
+        &lt;RouteView RouteData="@@routeData" 
+                   DefaultLayout="@@typeof(MainLayout)" /&gt;
+    &lt;/Found&gt;
+&lt;/Router&gt;</code></pre>
+</div>
+
+<div class="pizza-card">
+    <h2>Layout Benefits</h2>
+    <ul>
+        <li><strong>Consistency:</strong> All pages share common UI elements</li>
+        <li><strong>Maintainability:</strong> Update layout once, affects all pages</li>
+        <li><strong>Flexibility:</strong> Different layouts for different page types</li>
+        <li><strong>Reusability:</strong> Layouts can be shared across components</li>
+        <li><strong>Separation of Concerns:</strong> Layout logic separate from page content</li>
+    </ul>
+</div>
+
+<style>
+    .layout-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+
+    .layout-option {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        border-left: 4px solid #d32f2f;
+    }
+
+    .layout-option h3 {
+        margin-top: 0;
+        color: #d32f2f;
+    }
+
+    .layout-option ul {
+        margin: 1rem 0;
+    }
+
+    .layout-option li {
+        margin-bottom: 0.5rem;
+    }
+
+    pre {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 4px;
+        overflow-x: auto;
+        border-left: 4px solid #d32f2f;
+    }
+
+    code {
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+    }
+</style>

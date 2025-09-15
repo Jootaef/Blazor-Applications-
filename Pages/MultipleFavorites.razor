@@ -1,0 +1,59 @@
+@page "/multiple-favorites/{*favorites}"
+
+<h1>🍕 Multiple Favorite Pizzas</h1>
+
+<div class="pizza-card">
+    <h2>Your Favorites</h2>
+    <p>Your favorite pizzas are: <strong>@Favorites</strong></p>
+
+    <div class="topping-info">
+        <h3>Individual Favorites:</h3>
+        <ul>
+            @foreach (var favorite in GetFavoriteList())
+            {
+                <li>@favorite</li>
+            }
+        </ul>
+
+        <h3>Recommendations:</h3>
+        <p>Based on your favorites, we recommend trying:</p>
+        <ul>
+            <li>Supreme Pizza</li>
+            <li>Meat Lovers Pizza</li>
+            <li>Vegetarian Deluxe</li>
+        </ul>
+    </div>
+
+    <div style="margin-top: 1rem;">
+        <h3>Try these URLs:</h3>
+        <ul>
+            <li>
+                <NavLink href="/multiple-favorites/margherita">Single favorite</NavLink>
+            </li>
+            <li>
+                <NavLink href="/multiple-favorites/margherita/pepperoni">Two favorites</NavLink>
+            </li>
+            <li>
+                <NavLink href="/multiple-favorites/margherita/pepperoni/supreme">Three favorites</NavLink>
+            </li>
+        </ul>
+    </div>
+
+    <NavLink href="/" class="btn">Back to Home</NavLink>
+</div>
+
+@code {
+    [Parameter]
+    public string Favorites { get; set; } = string.Empty;
+
+    private List<string> GetFavoriteList()
+    {
+        if (string.IsNullOrEmpty(Favorites))
+            return new List<string> { "No favorites specified" };
+
+        return Favorites.Split('/')
+        .Where(f => !string.IsNullOrEmpty(f))
+        .Select(f => f.Replace("-", " ").Replace("_", " "))
+        .ToList();
+    }
+}
